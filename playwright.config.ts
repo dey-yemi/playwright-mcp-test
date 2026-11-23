@@ -37,18 +37,27 @@ export default defineConfig({
     { name: 'setup-webkit', testMatch: /auth\.setup\.ts/, use: { ...devices['Desktop Safari'] } },
     {
       name: 'chromium',
+      testIgnore: /visual\.spec\.ts/,
       use: { ...devices['Desktop Chrome'], storageState: '.auth/chromium.json' },
       dependencies: ['setup-chromium'],
     },
     {
       name: 'firefox',
+      testIgnore: /visual\.spec\.ts/,
       use: { ...devices['Desktop Firefox'], storageState: '.auth/firefox.json' },
       dependencies: ['setup-firefox'],
     },
     {
       name: 'webkit',
+      testIgnore: /visual\.spec\.ts/,
       use: { ...devices['Desktop Safari'], storageState: '.auth/webkit.json' },
       dependencies: ['setup-webkit'],
+    },
+    /* Visual baselines: no login needed, so this project skips the auth setup. */
+    {
+      name: 'visual',
+      testMatch: /visual\.spec\.ts/,
+      use: { ...devices['Desktop Chrome'] },
     },
 
     /* Test against mobile viewports. */
